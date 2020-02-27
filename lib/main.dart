@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'checkBox.dart';
 import 'tasks.dart';
+import 'toDo.dart';
 
 List tasksList = [];
+List<ToDoList> toDosTask=[];
+int id=ToDoList.id;
 
 void main() {
   return runApp(MyApp());
@@ -42,14 +46,15 @@ class _MyAppState extends State<MyApp> {
                 textInputAction: TextInputAction.done,
                 onSubmitted: (term) {
                   setState(() {
-                    toDoList(term);
+                    todo(term);
+                    id++;
                     myController.clear();
                   });
                 }),
             Expanded(
               child: Container(
                 height: 400,
-                child: Tasks(tasksList),
+                child: Tasks(toDosTask,id),
               ),
             )
           ],
@@ -59,8 +64,13 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-toDoList(String task) {
+toDoList(String task){
   tasksList.add(task);
   return tasksList;
 }
 
+todo(String task){
+ ToDoList newToDo=ToDoList(contentTask:task);
+ toDosTask.add(newToDo);
+return toDosTask;
+}

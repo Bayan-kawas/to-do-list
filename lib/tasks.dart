@@ -3,30 +3,20 @@ import 'package:to_do_list/main.dart';
 import 'checkBox.dart';
 import 'toDo.dart';
 
-int index;
-
 class Tasks extends StatefulWidget {
-  List tasks;
-  int id;
-
-  Tasks(this.tasks, this.id);
+  Tasks();
 
   @override
-  _TasksState createState() => _TasksState(tasks, id);
+  _TasksState createState() => _TasksState();
 }
 
 class _TasksState extends State<Tasks> {
-  List task;
-  int id;
-
-  _TasksState(this.task, this.id);
-
-  bool checked = false;
+  _TasksState();
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: toDosTask.length,
+        itemCount: ToDo.toDos.length,
         itemBuilder: (BuildContext context, int index) {
           return Column(
             children: <Widget>[
@@ -40,12 +30,10 @@ class _TasksState extends State<Tasks> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          CheckBox(task, task[index].id),
+                          CheckBox(ToDo.toDos[index]),
                           Padding(
                             padding: EdgeInsets.all(20),
-                            child: Text(
-                              task[index].contentTask,
-                            ),
+                            child: TaskText(ToDo.toDos[index].contentTask),
                           ),
                           InkWell(
                             child: Icon(
@@ -54,14 +42,10 @@ class _TasksState extends State<Tasks> {
                               size: 30.0,
                             ),
                             onTap: () {
-                              setState(() {
-                                toDosTask.removeAt(task[index].id);
-                               // task[index].id--;
-                                // ToDoList.id+1;
-                              });
+                              ToDo.toDos.removeAt(index);
+                              dispose();
                             },
                           ),
-
                         ],
                       )),
                 ),
@@ -78,3 +62,40 @@ class _TasksState extends State<Tasks> {
 //    currentColor==Colors.black26;
 //  }
 //}
+
+class TaskText extends StatefulWidget {
+  String text;
+
+  TaskText(this.text);
+
+  @override
+  _TaskTextState createState() => _TaskTextState();
+}
+
+class _TaskTextState extends State<TaskText> {
+  var color;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    color=Colors.black;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Text(widget.text, style: TextStyle(color: color)),
+      onTap: () {
+        setState(() {
+          color = Colors.yellow;
+        });
+      },
+    );
+  }
+  @override
+  void dispose() {
+    color=Colors.black;
+    super.dispose();
+  }
+}

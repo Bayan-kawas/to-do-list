@@ -3,10 +3,7 @@ import 'checkBox.dart';
 import 'tasks.dart';
 import 'toDo.dart';
 
-List tasksList = [];
-List<ToDoList> toDosTask=[];
-int id = 0;
-bool completed=false;
+List<ToDo> toDos = [];
 
 void main() {
   return runApp(MyApp());
@@ -40,6 +37,7 @@ class _MyAppState extends State<MyApp> {
             child: Column(
           children: <Widget>[
             TextField(
+                controller: myController,
                 decoration: const InputDecoration(
                   icon: Icon(Icons.person),
                   hintText: 'What needs to be done ?',
@@ -47,19 +45,14 @@ class _MyAppState extends State<MyApp> {
                 textInputAction: TextInputAction.done,
                 onSubmitted: (term) {
                   setState(() {
-
-                    todo(term,id,completed);
-
-                    print(id);
-
-
+                    addTodo(term);
                     myController.clear();
                   });
                 }),
             Expanded(
               child: Container(
                 height: 400,
-                child: Tasks(toDosTask,id),
+                child: Tasks(),
               ),
             )
           ],
@@ -69,13 +62,7 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-toDoList(String task){
-  tasksList.add(task);
-  return tasksList;
-}
-
-todo(String task,int id ,bool completed){
- ToDoList newToDo=ToDoList(contentTask:task,id:id ,completed:completed);
- toDosTask.add(newToDo);
-return toDosTask;
+addTodo(String task) {
+  ToDo toDo = ToDo(task);
+  ToDo.toDos.add(toDo);
 }

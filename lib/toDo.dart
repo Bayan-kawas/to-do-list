@@ -1,7 +1,16 @@
-class ToDoList {
-   int id ;
+class ToDo {
+  static int lastId = 0;
+  static List<ToDo> toDos = [];
   String contentTask = '';
-   bool completed = false;
 
-  ToDoList({this.contentTask,this.id,this.completed});
+  int id;
+  bool completed = false;
+
+  ToDo(contentTask) {
+    this.id = lastId + 1;
+    this.contentTask = contentTask;
+  }
+
+  static completeTodo(id) {}
+
 }

@@ -56,7 +56,7 @@ class _TasksState extends State<Tasks> {
                             onTap: () {
                               setState(() {
                                 toDosTask.removeAt(task[index].id);
-                                task[index].id--;
+                               // task[index].id--;
                                 // ToDoList.id+1;
                               });
                             },

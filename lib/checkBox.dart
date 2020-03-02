@@ -37,10 +37,10 @@ class _CheckBoxState extends State<CheckBox> {
 
       children: <Widget>[
         Checkbox(
-            value:checked,
+            value:tasks[index].completed,
             onChanged: (bool val) {
               setState(() {
-                checked = val;
+                tasks[index].completed = val;
                 color(checked);
               });
             },

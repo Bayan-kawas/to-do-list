@@ -1,7 +1,7 @@
 class ToDoList {
-  static int id = 0;
-  String contentTask = 'tttttttt';
-  static bool completed = false;
+   int id ;
+  String contentTask = '';
+   bool completed = false;
 
-  ToDoList({this.contentTask});
+  ToDoList({this.contentTask,this.id,this.completed});
 }

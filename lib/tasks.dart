@@ -40,7 +40,7 @@ class _TasksState extends State<Tasks> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          CheckBox(task, ToDoList.id),
+                          CheckBox(task, task[index].id),
                           Padding(
                             padding: EdgeInsets.all(20),
                             child: Text(
@@ -55,9 +55,9 @@ class _TasksState extends State<Tasks> {
                             ),
                             onTap: () {
                               setState(() {
-                                toDosTask.removeAt(ToDoList.id);
-                                index-1;
-                               // ToDoList.id+1;
+                                toDosTask.removeAt(task[index].id);
+                                task[index].id--;
+                                // ToDoList.id+1;
                               });
                             },
                           ),

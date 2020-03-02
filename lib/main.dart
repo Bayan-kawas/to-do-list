@@ -5,7 +5,8 @@ import 'toDo.dart';
 
 List tasksList = [];
 List<ToDoList> toDosTask=[];
-int id=ToDoList.id;
+int id=0;
+bool completed=false;
 
 void main() {
   return runApp(MyApp());
@@ -46,7 +47,7 @@ class _MyAppState extends State<MyApp> {
                 textInputAction: TextInputAction.done,
                 onSubmitted: (term) {
                   setState(() {
-                    todo(term);
+                    todo(term,id,completed);
                     id++;
                     myController.clear();
                   });
@@ -69,8 +70,8 @@ toDoList(String task){
   return tasksList;
 }
 
-todo(String task){
- ToDoList newToDo=ToDoList(contentTask:task);
+todo(String task,int id ,bool completed){
+ ToDoList newToDo=ToDoList(contentTask:task,id:id ,completed:completed);
  toDosTask.add(newToDo);
 return toDosTask;
 }

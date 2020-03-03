@@ -30,7 +30,9 @@ class _TasksState extends State<Tasks> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          CheckBox(ToDo.toDos[index]),
+                          CheckBox(
+                              key: new Key(ToDo.toDos[index].id.toString()),
+                              toDo: ToDo.toDos[index]),
                           Padding(
                             padding: EdgeInsets.all(20),
                             child: TaskText(ToDo.toDos[index].contentTask),
@@ -43,7 +45,7 @@ class _TasksState extends State<Tasks> {
                             ),
                             onTap: () {
                               ToDo.toDos.removeAt(index);
-                              dispose();
+                              setState(() {});
                             },
                           ),
                         ],
@@ -73,29 +75,10 @@ class TaskText extends StatefulWidget {
 }
 
 class _TaskTextState extends State<TaskText> {
-  var color;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    color=Colors.black;
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: Text(widget.text, style: TextStyle(color: color)),
-      onTap: () {
-        setState(() {
-          color = Colors.yellow;
-        });
-      },
+    return Text(
+      widget.text,
     );
-  }
-  @override
-  void dispose() {
-    color=Colors.black;
-    super.dispose();
   }
 }

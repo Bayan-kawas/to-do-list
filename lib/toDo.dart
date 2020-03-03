@@ -7,10 +7,9 @@ class ToDo {
   bool completed = false;
 
   ToDo(contentTask) {
-    this.id = lastId + 1;
+    this.id = ++lastId;
     this.contentTask = contentTask;
   }
 
   static completeTodo(id) {}
-
 }

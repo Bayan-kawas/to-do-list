@@ -1,10 +1,13 @@
 class ToDo {
   static int lastId = 0;
-  static List<ToDo> toDos = [];
+  static List toDos = [];
+
+  static bool filterChoose;
+  static String filterType = '';
+   int id;
+  bool completed = false;
   String contentTask = '';
 
-  int id;
-  bool completed = false;
 
   ToDo(contentTask) {
     this.id = ++lastId;

@@ -28,7 +28,8 @@ class _CheckBoxState extends State<CheckBox> {
           onChanged: (bool val) {
             setState(() {
               checked = val;
-
+              widget.toDo.completed=checked;
+              print( widget.toDo.completed);
             });
           },
         ),

@@ -15,56 +15,54 @@ class _TasksState extends State<Tasks> {
 
   @override
   Widget build(BuildContext context) {
-
     var content;
-    content=ToDo.toDos;
+    content = ToDo.toDos;
 
-    if (ToDo.toDos.length != null) {
-      int itemCount=ToDo.toDos.length;
-       if(ToDo.filterChoose==true){
-         itemCount=toDosFiltered.length;
-       }
-      return ListView.builder(
-          itemCount:itemCount,
-          itemBuilder: (BuildContext context,index) {
-            return Column(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.all(5),
-                  width: 400,
-                  child: Card(
-                    color: Colors.white30,
-                    child: Padding(
-                        padding: EdgeInsets.all(5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            CheckBox(
-                                key: new Key(ToDo.toDos[index].id.toString()),
-                                toDo: ToDo.toDos[index]),
-                            Padding(
-                              padding: EdgeInsets.all(20),
-                              child: TaskText(ToDo.toDos[index].contentTask),
-                            ),
-                            InkWell(
-                              child: Icon(
-                                Icons.clear,
-                                color: Colors.red,
-                                size: 30.0,
-                              ),
-                              onTap: () {
-                                ToDo.toDos.removeAt(index);
-                                setState(() {});
-                              },
-                            ),
-                          ],
-                        )),
+    int itemCount = ToDo.toDos.length;
+    if (ToDo.filterChoose == true) {
+      itemCount = toDosFiltered.length;
+    }
+    return ListView.builder(
+        itemCount: itemCount,
+        itemBuilder: (BuildContext context, index) {
+          return Column(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(5),
+                width: 400,
+                child: Card(
+                  color: Colors.white30,
+                  child: Padding(
+                    padding: EdgeInsets.all(5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        CheckBox(
+                            key: new Key(ToDo.toDos[index].id.toString()),
+                            toDo: ToDo.toDos[index]),
+                        Padding(
+                          padding: EdgeInsets.all(20),
+                          child: contentText(index),
+                        ),
+                        InkWell(
+                          child: Icon(
+                            Icons.clear,
+                            color: Colors.red,
+                            size: 30.0,
+                          ),
+                          onTap: () {
+                            ToDo.toDos.removeAt(index);
+                            setState(() {});
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ],
-            );
-          });
-    }
+              ),
+            ],
+          );
+        });
   }
 }
 //fun(){
@@ -75,23 +73,22 @@ class _TasksState extends State<Tasks> {
 //  }
 //}
 
-contentText(int index){
-  if(ToDo.filterChoose==true){
-    if(ToDo.filterType == 'completed'){
-      return TaskText(toDosFiltered[index].contentTask);
-    }else if (ToDo.filterType == 'pending'){
-      return TaskText(toDosFiltered[index].contentTask);
-    }else{
-      return TaskText(ToDo.toDos[index].contentTask);
-    }
-
+contentText(int index) {
+  if (ToDo.filterType != '') {
+    return TaskText(
+      text: toDosFiltered[index].contentTask,
+    );
+  } else {
+    return TaskText(
+      text: ToDo.toDos[index].contentTask,
+    );
   }
 }
 
+
 class TaskText extends StatefulWidget {
   String text;
-
-  TaskText(this.text);
+  TaskText({ this.text});
 
   @override
   _TaskTextState createState() => _TaskTextState();

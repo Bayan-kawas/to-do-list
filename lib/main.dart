@@ -3,8 +3,8 @@ import 'checkBox.dart';
 import 'tasks.dart';
 import 'toDo.dart';
 
-
 List toDosFiltered;
+
 void main() {
   return runApp(MyApp());
 }
@@ -26,9 +26,8 @@ class _MyAppState extends State<MyApp> {
 
   int currRadio;
 
-
   void initState() {
-    currRadio ;
+    currRadio;
     ToDo.filterType = '';
     ToDo.filterChoose = false;
     super.initState();
@@ -78,7 +77,7 @@ class _MyAppState extends State<MyApp> {
               setState(() {
                 currRadio = value;
                 ToDo.filterType = 'all';
-                ToDo.filterChoose=true;
+                ToDo.filterChoose = true;
                 filter(ToDo.filterType);
               });
             },
@@ -91,7 +90,7 @@ class _MyAppState extends State<MyApp> {
               setState(() {
                 currRadio = value;
                 ToDo.filterType = 'completed';
-                ToDo.filterChoose=true;
+                ToDo.filterChoose = true;
                 filter(ToDo.filterType);
               });
             },
@@ -104,7 +103,7 @@ class _MyAppState extends State<MyApp> {
               setState(() {
                 currRadio = value;
                 ToDo.filterType = 'pending';
-                ToDo.filterChoose=true;
+                ToDo.filterChoose = true;
                 filter(ToDo.filterType);
               });
             },
@@ -121,36 +120,22 @@ addTodo(String task) {
 }
 
 filter(String filterType) {
+  toDosFiltered = [];
   if (filterType == 'completed') {
-    toDosFiltered = [];
-    int i = 0;
-    for ( i = 0; i < ToDo.toDos.length; i++) {
+    for (int i = 0; i < ToDo.toDos.length; i++) {
       if (ToDo.toDos[i].completed == true) {
         toDosFiltered.add(ToDo.toDos[i]);
-        print(ToDo.toDos[i].contentTask);
       }
     }
-    print(toDosFiltered.length);
-    print('completed');
-  } else if (filterType == 'pending'){
-    toDosFiltered = [];
-    int i = 0;
-    for ( i = 0; i < ToDo.toDos.length; i++) {
+  } else if (filterType == 'pending') {
+    for (int i = 0; i < ToDo.toDos.length; i++) {
       if (ToDo.toDos[i].completed == false) {
         toDosFiltered.add(ToDo.toDos[i]);
-        print(ToDo.toDos[i].contentTask);
+      }
     }
-    }
-    print(toDosFiltered.length);
-    print('pending');
   } else {
-  toDosFiltered = [];
-  int i=0;
-    for ( i = 0; i < ToDo.toDos.length; i++) {
-    toDosFiltered.add(ToDo.toDos[i]);
-    print(ToDo.toDos[i].contentTask);
+    for (int i = 0; i < ToDo.toDos.length; i++) {
+      toDosFiltered.add(ToDo.toDos[i]);
     }
-    print(toDosFiltered.length);
-    print('All');
   }
 }

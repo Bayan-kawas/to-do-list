@@ -51,7 +51,13 @@ class _TasksState extends State<Tasks> {
                             size: 30.0,
                           ),
                           onTap: () {
-                            ToDo.toDos.removeAt(index);
+                            if(ToDo.filterType != ''){
+                              ToDo.toDos.removeAt(index);
+                              toDosFiltered.removeAt(index);
+
+                            }else{
+                              ToDo.toDos.removeAt(index);
+                            }
                             setState(() {});
                           },
                         ),
@@ -88,7 +94,7 @@ contentText(int index) {
 
 class TaskText extends StatefulWidget {
   String text;
-  TaskText({ this.text});
+  TaskText({this.text});
 
   @override
   _TaskTextState createState() => _TaskTextState();

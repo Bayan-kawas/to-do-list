@@ -51,10 +51,14 @@ class _TasksState extends State<Tasks> {
                             size: 30.0,
                           ),
                           onTap: () {
-                            if(ToDo.filterType != ''){
-                              ToDo.toDos.removeAt(index);
-                              toDosFiltered.removeAt(index);
-
+                            if (ToDo.filterType != '') {
+                              for (int i = 0; i < ToDo.toDos.length; i++) {
+                                if (ToDo.toDos[i].contentTask ==
+                                    toDosFiltered[index].contentTask) {
+                                  ToDo.toDos.removeAt(i);
+                                }
+                              }
+                              filter(ToDo.filterType);
                             }else{
                               ToDo.toDos.removeAt(index);
                             }
@@ -91,9 +95,9 @@ contentText(int index) {
   }
 }
 
-
 class TaskText extends StatefulWidget {
   String text;
+
   TaskText({this.text});
 
   @override

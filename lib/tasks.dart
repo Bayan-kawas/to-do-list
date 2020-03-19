@@ -15,8 +15,12 @@ class _TasksState extends State<Tasks> {
 
   @override
   Widget build(BuildContext context) {
-    var content;
-    content = ToDo.toDos;
+    List<ToDo> toDoChecked;
+    if (ToDo.filterType != '') {
+      toDoChecked = toDosFiltered;
+    } else {
+      toDoChecked = ToDo.toDos;
+    }
 
     int itemCount = ToDo.toDos.length;
     if (ToDo.filterChoose == true) {
@@ -38,8 +42,11 @@ class _TasksState extends State<Tasks> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         CheckBox(
-                            key: new Key(ToDo.toDos[index].id.toString()),
-                            toDo: ToDo.toDos[index]),
+                          key: new Key(
+                            toDoChecked[index].id.toString(),
+                          ),
+                          toDo: toDoChecked[index],
+                        ),
                         Padding(
                           padding: EdgeInsets.all(20),
                           child: contentText(index),
@@ -59,7 +66,7 @@ class _TasksState extends State<Tasks> {
                                 }
                               }
                               filter(ToDo.filterType);
-                            }else{
+                            } else {
                               ToDo.toDos.removeAt(index);
                             }
                             setState(() {});

@@ -15,7 +15,7 @@ class _TasksState extends State<Tasks> {
 
   @override
   Widget build(BuildContext context) {
-    List<ToDo> toDoChecked;
+    List toDoChecked;
     if (ToDo.filterType != '') {
       toDoChecked = toDosFiltered;
     } else {
